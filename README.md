@@ -15,7 +15,7 @@ Finds and displays auto-generated URLs like author archives, 404, search, feeds,
    - author archives
    - static/search examples
    - media attachment links
-   - taxonomy/date archives
+   - category, tag, and date archives
    - feed endpoints
    - REST API root
    - pingback URL
@@ -25,6 +25,7 @@ Finds and displays auto-generated URLs like author archives, 404, search, feeds,
 
 Notes:
 - The 404 entry is an example path intended to return a 404 response.
+- Authors, attachments, categories, and tags are displayed 100 at a time. Use the section pagination links for larger datasets.
 - Large media libraries are queried in pages to reduce memory pressure.
 
 ## Development and Testing
