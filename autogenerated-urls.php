@@ -26,7 +26,7 @@ add_action('admin_menu', function () {
   );
 });
 
-function agud_display_page()
+function agud_display_page(): void
 {
   $page = agud_get_current_page();
   $total = 0;
@@ -60,7 +60,7 @@ function agud_display_page()
   echo '</div>';
 }
 
-function agud_get_current_page()
+function agud_get_current_page(): int
 {
   $raw_page = $_GET[AGUD_PAGE_QUERY_ARG] ?? 1;
   $page = is_scalar($raw_page) ? absint(wp_unslash($raw_page)) : 1;
@@ -68,7 +68,7 @@ function agud_get_current_page()
   return max(1, $page);
 }
 
-function agud_section($title, $urls, $total = 0, $page = 1)
+function agud_section(string $title, array $urls, int $total = 0, int $page = 1): void
 {
   echo '<h2>' . esc_html($title) . '</h2>';
   if (empty($urls)) {
@@ -99,7 +99,7 @@ function agud_section($title, $urls, $total = 0, $page = 1)
   }
 }
 
-function agud_get_author_urls($page = 1, &$total = 0)
+function agud_get_author_urls(int $page = 1, int &$total = 0): array
 {
   $urls = [];
   $query = new WP_User_Query([
@@ -116,7 +116,7 @@ function agud_get_author_urls($page = 1, &$total = 0)
   return $urls;
 }
 
-function agud_get_attachment_urls($page = 1, &$total = 0)
+function agud_get_attachment_urls(int $page = 1, int &$total = 0): array
 {
   $urls = [];
 
@@ -145,7 +145,7 @@ function agud_get_attachment_urls($page = 1, &$total = 0)
   return $urls;
 }
 
-function agud_get_taxonomy_urls($taxonomy, $page = 1, &$total = 0)
+function agud_get_taxonomy_urls(string $taxonomy, int $page = 1, int &$total = 0): array
 {
   $urls = [];
 
@@ -172,7 +172,7 @@ function agud_get_taxonomy_urls($taxonomy, $page = 1, &$total = 0)
   return $urls;
 }
 
-function agud_get_archive_urls()
+function agud_get_archive_urls(): array
 {
   $urls = [];
   $category_total = 0;
@@ -185,7 +185,7 @@ function agud_get_archive_urls()
   return $urls;
 }
 
-function agud_get_date_archive_urls()
+function agud_get_date_archive_urls(): array
 {
   $urls = [];
 
@@ -217,7 +217,7 @@ function agud_get_date_archive_urls()
   return $urls;
 }
 
-function agud_get_cpt_archive_urls()
+function agud_get_cpt_archive_urls(): array
 {
   $urls = [];
   $post_types = get_post_types(['public' => true, 'has_archive' => true], 'objects');
