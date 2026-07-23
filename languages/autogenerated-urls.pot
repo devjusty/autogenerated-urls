@@ -16,6 +16,9 @@ msgstr ""
 msgid "Auto URLs"
 msgstr ""
 
+msgid "View URLs"
+msgstr ""
+
 msgid "Author Archives"
 msgstr ""
 

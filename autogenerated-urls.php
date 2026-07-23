@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Auto-Generated URLs Display
+Plugin Name: Display Auto-Generated URLs
 Description: Finds and displays auto-generated URLs like author archives, 404, search, feeds, REST API, trackbacks, media, archives, and CPT archives.
-Version: 1.2
+Version: 1.2.1
 Requires at least: 5.9
 Author: Justin Thompson
 Author URI: https://justy.dev
@@ -26,6 +26,15 @@ add_action('admin_menu', function () {
     'agud_display_page'
   );
 });
+
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'agud_plugin_action_links');
+
+function agud_plugin_action_links(array $links): array
+{
+  $view_urls_link = '<a href="' . esc_url(admin_url('tools.php?page=auto-generated-urls')) . '">' . esc_html__('View URLs', AGUD_TEXT_DOMAIN) . '</a>';
+
+  return ['agud-view-urls' => $view_urls_link] + $links;
+}
 
 function agud_display_page(): void
 {
@@ -64,7 +73,7 @@ function agud_display_page(): void
 function agud_get_current_page(): int
 {
   $raw_page = $_GET[AGUD_PAGE_QUERY_ARG] ?? 1;
-  $page = is_scalar($raw_page) ? absint(wp_unslash($raw_page)) : 1;
+  $page = is_scalar($raw_page) ? (int) wp_unslash($raw_page) : 1;
 
   return max(1, $page);
 }
