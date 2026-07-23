@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Display Auto-Generated URLs
  * Description: Finds and displays auto-generated URLs like author archives, 404, search, feeds, REST API, trackbacks, media, archives, and CPT archives.
- * Version: 1.2.1
+ * Version: 1.1.1
  * Requires at least: 5.9
  * Author: Justin Thompson
  * Author URI: https://justy.dev
