@@ -79,6 +79,13 @@ The integration tests cover URL collection, pagination boundaries, invalid resul
 
 - Fixed pagination advancing all sections at once. Author, media, category, and tag archives now paginate independently via `agud_author_page`, `agud_attachment_page`, `agud_category_page`, and `agud_tag_page` query parameters.
 - Fixed month archive labels rendering in the wrong timezone. Date archive month names now use `gmmktime()` so they display correctly regardless of the WordPress timezone setting.
+- Redesigned the admin page with a responsive card grid layout, showing sections side-by-side instead of one long vertical scroll.
+- Added item counts to each section heading with proper pluralization.
+- Added a copy-to-clipboard button next to every URL for quick sharing.
+- Added a live filter search box to narrow visible URLs across all sections without reloading.
+- Added a page description and improved empty-state styling.
+- Removed dead code: `agud_get_archive_urls()` wrapper, `AGUD_TEXT_DOMAIN` constant, and discouraged `load_plugin_textdomain()` call.
+- Removed stale `TODO_code-review.md` references from README and `.gitattributes`.
 
 ### 1.1.1
 

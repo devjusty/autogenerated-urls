@@ -13,6 +13,18 @@ msgstr ""
 msgid "Auto-Generated URLs"
 msgstr ""
 
+msgid "Common WordPress URLs collected for review and testing. Click any URL to open it, or use the copy button."
+msgstr ""
+
+msgid "Filter URLs…"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Copied!"
+msgstr ""
+
 msgid "Auto URLs"
 msgstr ""
 
@@ -72,6 +84,11 @@ msgstr ""
 
 msgid "None found."
 msgstr ""
+
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "Previous"
 msgstr ""
