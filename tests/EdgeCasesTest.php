@@ -4,45 +4,45 @@ class EdgeCasesTest extends WP_UnitTestCase
 {
   public function test_zero_page_value_defaults_to_one()
   {
-    $_GET[AGUD_PAGE_QUERY_ARG] = 0;
+    $_GET[AGUD_AUTHOR_PAGE_ARG] = 0;
 
-    $page = agud_get_current_page();
+    $page = agud_get_current_page(AGUD_AUTHOR_PAGE_ARG);
 
     $this->assertSame(1, $page);
   }
 
   public function test_negative_page_value_defaults_to_one()
   {
-    $_GET[AGUD_PAGE_QUERY_ARG] = -4;
+    $_GET[AGUD_AUTHOR_PAGE_ARG] = -4;
 
-    $page = agud_get_current_page();
+    $page = agud_get_current_page(AGUD_AUTHOR_PAGE_ARG);
 
     $this->assertSame(1, $page);
   }
 
   public function test_text_page_value_defaults_to_one()
   {
-    $_GET[AGUD_PAGE_QUERY_ARG] = 'not-a-number';
+    $_GET[AGUD_AUTHOR_PAGE_ARG] = 'not-a-number';
 
-    $page = agud_get_current_page();
+    $page = agud_get_current_page(AGUD_AUTHOR_PAGE_ARG);
 
     $this->assertSame(1, $page);
   }
 
   public function test_array_page_value_defaults_to_one()
   {
-    $_GET[AGUD_PAGE_QUERY_ARG] = ['2'];
+    $_GET[AGUD_AUTHOR_PAGE_ARG] = ['2'];
 
-    $page = agud_get_current_page();
+    $page = agud_get_current_page(AGUD_AUTHOR_PAGE_ARG);
 
     $this->assertSame(1, $page);
   }
 
   public function test_null_page_value_defaults_to_one()
   {
-    $_GET[AGUD_PAGE_QUERY_ARG] = null;
+    $_GET[AGUD_AUTHOR_PAGE_ARG] = null;
 
-    $page = agud_get_current_page();
+    $page = agud_get_current_page(AGUD_AUTHOR_PAGE_ARG);
 
     $this->assertSame(1, $page);
   }
@@ -139,12 +139,12 @@ class EdgeCasesTest extends WP_UnitTestCase
       'agud_display_page'
     );
     ob_start();
-    agud_section('Paginated', ['Example' => home_url('/')], 101, 1);
+    agud_section('Paginated', ['Example' => home_url('/')], 101, 1, AGUD_AUTHOR_PAGE_ARG);
     $output = ob_get_clean();
     wp_set_current_user($current_user);
 
     $this->assertStringContainsString('tablenav-pages', $output);
-    $this->assertStringContainsString('agud_page=2', $output);
+    $this->assertStringContainsString('agud_author_page=2', $output);
   }
 
   public function test_full_page_renders_all_sections()
@@ -159,7 +159,12 @@ class EdgeCasesTest extends WP_UnitTestCase
 
   public function test_page_sections_preserve_order_and_pagination_metadata()
   {
-    $sections = agud_get_page_sections(2);
+    $_GET[AGUD_AUTHOR_PAGE_ARG] = 2;
+    $_GET[AGUD_ATTACHMENT_PAGE_ARG] = 2;
+    $_GET[AGUD_CATEGORY_PAGE_ARG] = 2;
+    $_GET[AGUD_TAG_PAGE_ARG] = 2;
+
+    $sections = agud_get_page_sections();
 
     $this->assertCount(11, $sections);
     $this->assertSame([
@@ -177,7 +182,7 @@ class EdgeCasesTest extends WP_UnitTestCase
     ], array_column($sections, 'title'));
 
     foreach ($sections as $section) {
-      $this->assertSame(['title', 'urls', 'total', 'page'], array_keys($section));
+      $this->assertSame(['title', 'urls', 'total', 'page', 'query_arg'], array_keys($section));
       $this->assertIsArray($section['urls']);
     }
 
@@ -208,6 +213,7 @@ class EdgeCasesTest extends WP_UnitTestCase
     foreach ([1, 5, 6, 7, 8, 9, 10] as $index) {
       $this->assertSame(0, $sections[$index]['total']);
       $this->assertSame(1, $sections[$index]['page']);
+      $this->assertSame('', $sections[$index]['query_arg']);
     }
   }
 
