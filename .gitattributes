@@ -4,7 +4,6 @@
 /.gitignore export-ignore
 /.vscode export-ignore
 /.wp-env.json export-ignore
-/TODO_code-review.md export-ignore
 /composer.json export-ignore
 /composer.lock export-ignore
 /phpunit.xml.dist export-ignore
